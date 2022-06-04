@@ -14,16 +14,26 @@ import static java.lang.System.exit;
  */
 public class MenuPrincipal extends javax.swing.JFrame {
     Controlador c;
-    
     InicioSesion inicioSesion;
+    GestorClientes gestorClientes;
+    GestorCoches gestorCoches;
+    GestorCompras gestorCompras;
+    GestorEmpleados gestorEmpleados;
+    GestorVentas gestorVentas;
 
     /**
      * Creates new form MenuPrincipal
      */
     public MenuPrincipal() {
         initComponents();
-        c = new Controlador();        
-        inicioSesion = new InicioSesion(c, jMenuBarGestion, jDesktopPaneEscritorio);    
+        c = new Controlador();       
+        gestorClientes = new GestorClientes(c);
+        gestorCoches = new GestorCoches(c);
+        gestorCompras = new GestorCompras(c, 0);
+        gestorEmpleados = new GestorEmpleados(c, 0);
+        gestorVentas = new GestorVentas(c, 0);
+        
+        inicioSesion = new InicioSesion(c, jMenuBarGestion, jDesktopPaneEscritorio, jMenuClientes, jMenuCoches, jMenuCompras, jMenuEmpleados, jMenuOpciones, jMenuVentas);    
         CentrarVentanaInicioSesion();
         
         jDesktopPaneEscritorio.add(inicioSesion);
@@ -35,6 +45,19 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Dimension tamanyoInicioSesion = inicioSesion.getSize();
         
         inicioSesion.setLocation((tamanyoEscritorio.width - tamanyoInicioSesion.width)/2, (tamanyoEscritorio.height- tamanyoInicioSesion.height)/2);
+    }
+    
+    private void CerrarVentanas() {
+        gestorClientes.setVisible(false);
+        gestorCoches.setVisible(false);
+        gestorCompras.setVisible(false);
+        gestorEmpleados.setVisible(false);
+        gestorVentas.setVisible(false);
+        inicioSesion = new InicioSesion(c, jMenuBarGestion, jDesktopPaneEscritorio, jMenuClientes, jMenuCoches, jMenuCompras, jMenuEmpleados, jMenuOpciones, jMenuVentas);    
+        CentrarVentanaInicioSesion();
+        
+        jDesktopPaneEscritorio.add(inicioSesion);
+        inicioSesion.setVisible(true);
     }
 
     /**
@@ -201,33 +224,43 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItemListarVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemListarVentasActionPerformed
-        GestorVentas gestorVentas = new GestorVentas(c, 0);
-        jDesktopPaneEscritorio.add(gestorVentas);
-        gestorVentas.setVisible(true);
+        if (!gestorVentas.isVisible()) {
+            gestorVentas = new GestorVentas(c, 0);
+            jDesktopPaneEscritorio.add(gestorVentas);
+            gestorVentas.setVisible(true);
+        }
     }//GEN-LAST:event_jMenuItemListarVentasActionPerformed
 
     private void jMenuItemListarComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemListarComprasActionPerformed
-        GestorCompras gestorCompras = new GestorCompras(c, 0);
-        jDesktopPaneEscritorio.add(gestorCompras);
-        gestorCompras.setVisible(true);
+        if (!gestorCompras.isVisible()) {
+            gestorCompras = new GestorCompras(c, 0);
+            jDesktopPaneEscritorio.add(gestorCompras);
+            gestorCompras.setVisible(true);
+        }        
     }//GEN-LAST:event_jMenuItemListarComprasActionPerformed
 
     private void jMenuItemListarEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemListarEmpleadosActionPerformed
-        GestorEmpleados gestorEmpleados = new GestorEmpleados(c, 0);
-        jDesktopPaneEscritorio.add(gestorEmpleados);
-        gestorEmpleados.setVisible(true);
+        if (!gestorEmpleados.isVisible()) {
+            gestorEmpleados = new GestorEmpleados(c, 0);
+            jDesktopPaneEscritorio.add(gestorEmpleados);
+            gestorEmpleados.setVisible(true);
+        }
     }//GEN-LAST:event_jMenuItemListarEmpleadosActionPerformed
 
     private void jMenuItemListarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemListarClientesActionPerformed
-        GestorClientes gestorClientes = new GestorClientes(c);
-        jDesktopPaneEscritorio.add(gestorClientes);
-        gestorClientes.setVisible(true);
+        if (!gestorClientes.isVisible()) {
+            gestorClientes = new GestorClientes(c);
+            jDesktopPaneEscritorio.add(gestorClientes);
+            gestorClientes.setVisible(true);
+        }
     }//GEN-LAST:event_jMenuItemListarClientesActionPerformed
 
     private void jMenuItemListarCochesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemListarCochesActionPerformed
-        GestorCoches gestorCoches = new GestorCoches(c);
-        jDesktopPaneEscritorio.add(gestorCoches);
-        gestorCoches.setVisible(true);
+        if (!gestorCoches.isVisible()) {
+            gestorCoches = new GestorCoches(c);
+            jDesktopPaneEscritorio.add(gestorCoches);
+            gestorCoches.setVisible(true);
+        }
     }//GEN-LAST:event_jMenuItemListarCochesActionPerformed
 
     private void jMenuItemSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSalirActionPerformed
@@ -235,29 +268,31 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemSalirActionPerformed
 
     private void jMenuItemRegistrarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRegistrarCompraActionPerformed
-        GestorCompras gestorCompras = new GestorCompras(c, 1);
-        jDesktopPaneEscritorio.add(gestorCompras);
-        gestorCompras.setVisible(true);
+        if (!gestorCompras.isVisible()) {
+            gestorCompras = new GestorCompras(c, 1);
+            jDesktopPaneEscritorio.add(gestorCompras);
+            gestorCompras.setVisible(true);
+        }
     }//GEN-LAST:event_jMenuItemRegistrarCompraActionPerformed
 
     private void jMenuItemRegistrarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRegistrarEmpleadoActionPerformed
-        GestorEmpleados gestorEmpleados = new GestorEmpleados(c, 1);
-        jDesktopPaneEscritorio.add(gestorEmpleados);
-        gestorEmpleados.setVisible(true);
+        if (!gestorEmpleados.isVisible()) {
+            gestorEmpleados = new GestorEmpleados(c, 1);
+            jDesktopPaneEscritorio.add(gestorEmpleados);
+            gestorEmpleados.setVisible(true);
+        }
     }//GEN-LAST:event_jMenuItemRegistrarEmpleadoActionPerformed
 
     private void jMenuItemRegistrarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRegistrarVentaActionPerformed
-        GestorVentas gestorVentas = new GestorVentas(c, 1);
-        jDesktopPaneEscritorio.add(gestorVentas);
-        gestorVentas.setVisible(true);
+        if (!gestorVentas.isVisible()) {
+            gestorVentas = new GestorVentas(c, 1);
+            jDesktopPaneEscritorio.add(gestorVentas);
+            gestorVentas.setVisible(true);
+        }
     }//GEN-LAST:event_jMenuItemRegistrarVentaActionPerformed
 
     private void jMenuItemCambiarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCambiarUsuarioActionPerformed
-        inicioSesion = new InicioSesion(c, jMenuBarGestion, jDesktopPaneEscritorio);    
-        CentrarVentanaInicioSesion();
-        
-        jDesktopPaneEscritorio.add(inicioSesion);
-        inicioSesion.setVisible(true);
+        CerrarVentanas();
     }//GEN-LAST:event_jMenuItemCambiarUsuarioActionPerformed
 
     /**

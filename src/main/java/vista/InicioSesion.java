@@ -6,6 +6,7 @@ package vista;
 
 import controlador.Controlador;
 import javax.swing.JDesktopPane;
+import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 
 /**
@@ -17,18 +18,37 @@ public class InicioSesion extends javax.swing.JInternalFrame {
     Controlador c;
     JMenuBar jMenuBarGestion;
     JDesktopPane jDesktopPaneEscritorio;
+    JMenu jMenuClientes;
+    JMenu jMenuCoches;
+    JMenu jMenuCompras;
+    JMenu jMenuEmpleados;
+    JMenu jMenuOpciones;
+    JMenu jMenuVentas;
     
     /**
      * Creates new form InicioSesion
      */
-    public InicioSesion(Controlador c, JMenuBar jMenuBarGestion, JDesktopPane jDesktopPaneEscritorio) {
+    public InicioSesion(Controlador c, JMenuBar jMenuBarGestion, JDesktopPane jDesktopPaneEscritorio, JMenu jMenuClientes, JMenu jMenuCoches, JMenu jMenuCompras, JMenu jMenuEmpleados, JMenu jMenuOpciones, JMenu jMenuVentas) {
         initComponents();
         this.c = c;
         this.jMenuBarGestion = jMenuBarGestion;
         this.jDesktopPaneEscritorio = jDesktopPaneEscritorio;
+        this.jMenuClientes = jMenuClientes;
+        this.jMenuCoches = jMenuCoches;
+        this.jMenuCompras = jMenuCompras;
+        this.jMenuEmpleados = jMenuEmpleados;
+        this.jMenuOpciones = jMenuOpciones;
+        this.jMenuVentas = jMenuVentas;
+        
         
         jMenuBarGestion.setEnabled(false);
         jDesktopPaneEscritorio.setEnabled(false);
+        jMenuClientes.setEnabled(false);
+        jMenuCoches.setEnabled(false);
+        jMenuCompras.setEnabled(false);
+        jMenuEmpleados.setEnabled(false);
+        jMenuOpciones.setEnabled(false);
+        jMenuVentas.setEnabled(false);
     }
     
     private boolean VerificarInicioSesion() {
@@ -150,6 +170,12 @@ public class InicioSesion extends javax.swing.JInternalFrame {
         if (verificacion == true) {
             jMenuBarGestion.setEnabled(true);
             jDesktopPaneEscritorio.setEnabled(true);
+            jMenuClientes.setEnabled(true);
+            jMenuCoches.setEnabled(true);
+            jMenuCompras.setEnabled(true);
+            jMenuEmpleados.setEnabled(true);
+            jMenuOpciones.setEnabled(true);
+            jMenuVentas.setEnabled(true);
             this.setVisible(false);
         } else {
             jLabelError.setText("El nombre de usuario o contrasenya no es el correcto.");
